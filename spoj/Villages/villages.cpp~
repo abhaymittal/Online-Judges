@@ -1,0 +1,35 @@
+#include<cstdio>
+#include<bitset>
+#include<vector>
+#define MAXVLG 1000
+using namespace std;
+
+int main()  {
+  vector<bitset<MAXVLG>> adjMat(MAXVLG);
+  int N,M;
+  scanf("%d %d",&N,&M);
+  for(int i=0;i<M;i++) {
+    int v1,v2;
+    scanf("%d %d",&v1,&v2);
+    adjMat[v1-1][v2-1]=1;
+  }
+  int nWays=0;
+  for(int i=0;i<N;i++) {
+    for(int j=i+1;j<N;j++) {
+      int nCommon=0;
+      for (int k=0;k<N;k++) {
+	if(adjMat[i][k]==1 && adjMat[j][k]==1)
+	  nCommon++;
+      }
+      nWays+=(nCommon*(nCommon-1))/2;
+    }
+  }
+  printf("%d\n",nWays);
+  // for(int i=0;i<N;i++) {
+  //   for(int j=0;j<N;j++) {
+  //     int a=adjMat[i][j];
+  //     printf("%d ",a);
+  //   }
+  //   printf("\n");
+  // }
+}
